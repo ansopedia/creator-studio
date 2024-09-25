@@ -20,7 +20,12 @@
     "no-console": "error",
     "react/react-in-jsx-scope": "off",
     "@typescript-eslint/no-unused-vars": "error",
-    "import/no-unresolved": "error",
+    "import/no-unresolved": [
+      "error",
+      {
+        "ignore": ["^@/"]
+      }
+    ],
     "prefer-arrow-callback": ["error"],
     "func-style": ["error", "expression"],
     "prefer-destructuring": ["error", { "object": true, "array": true }]
