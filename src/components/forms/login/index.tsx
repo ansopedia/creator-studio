@@ -13,7 +13,16 @@ const LoginForm = () => {
       {Ansopedia_CONSTANTS.loginForm.map((field) => (
         <FormGenerator {...field} key={field.id} register={register} errors={errors} />
       ))}
-      <Button type="submit" className="rounded-2xl">
+      <div className="flex items-center justify-between">
+        <label className="flex items-center">
+          <input type="checkbox" {...register("rememberMe")} className="mr-2" />
+          <span>Remember me</span>
+        </label>
+        <a href="#" className="text-blue-500 hover:underline">
+          forget password?
+        </a>
+      </div>
+      <Button type="submit" className="rounded-2xl" disabled={isPending}>
         <Loader loading={isPending}>Sign In with Email</Loader>
       </Button>
     </form>
