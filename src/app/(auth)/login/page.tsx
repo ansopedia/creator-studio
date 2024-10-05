@@ -2,25 +2,31 @@ import Image from "next/image";
 import Link from "next/link";
 
 import LoginForm from "@/components/forms/login";
+import { Divider, SignInWithGoogle, Typography } from "@/components/ui";
 
 const LoginPage = () => {
   return (
-    <div className="container m-auto flex h-dvh w-dvw items-center justify-center gap-6 p-6">
+    <div className="h-vh container m-auto flex min-h-dvh w-svw items-center justify-center gap-10 p-6">
       <div className="lg:1/4 w-full sm:w-2/3 md:w-2/4 lg:w-1/3">
-        <h5 className="text-themeTextWhite text-base font-bold">Login</h5>
-        <p className="text-themeTextGray leading-tight">
-          Welcome Back <span className="text-orange-500">Ansopedian!</span>
-        </p>
+        <Typography variant="h2" as="h1" className="border-none">
+          Welcome Back
+        </Typography>
+        <Typography variant="h1" className="text-primary">
+          Ansopedian!
+        </Typography>
+        <Typography variant="p">Login to continue</Typography>
         <LoginForm />
-        <p className="mt-4">
+        <Divider>Or</Divider>
+        <SignInWithGoogle />
+        <Typography variant="p">
           Don&apos;t have an account yet?
           <Link href="/signup" className="text-blue-500 hover:underline">
-            Sign up
+            &nbsp;Sign up
           </Link>
-        </p>
+        </Typography>
       </div>
       <div className="hidden items-center justify-center sm:block sm:w-2/3 md:w-2/3 lg:w-1/3">
-        <Image src="/images/login-illustrator.svg" alt="login" width={500} height={500} />
+        <Image src="/images/login-illustrator.svg" alt="login" width={500} height={500} objectFit="contain" />
       </div>
     </div>
   );
