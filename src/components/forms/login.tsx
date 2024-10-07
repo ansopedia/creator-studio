@@ -1,21 +1,30 @@
 "use client";
 
+import { Path } from "react-hook-form";
+
 import { FormGenerator, Loader } from "@/components/global";
 import { Button, Checkbox } from "@/components/ui";
 import { Ansopedia_CONSTANTS } from "@/constants";
-import { useAuthSignIn } from "@/hooks";
+import { useLogin } from "@/hooks";
+import { LoginSchema } from "@/types/auth";
 
 const LoginForm = () => {
-  const { isPending, onAuthenticateUser, register, errors } = useAuthSignIn();
+  const { isPending, handleSubmit, register, errors, onSubmit } = useLogin();
 
   return (
-    <form className="mt-10 flex flex-col gap-6" onSubmit={onAuthenticateUser}>
+    <form className="mt-10 flex flex-col gap-6" onSubmit={handleSubmit(onSubmit)}>
       {Ansopedia_CONSTANTS.loginForm.map((field) => (
-        <FormGenerator {...field} key={field.id} register={register} errors={errors} />
+        <FormGenerator
+          {...field}
+          key={field.id}
+          register={register}
+          errors={errors}
+          name={field.name as Path<LoginSchema>}
+        />
       ))}
       <div className="flex items-center justify-between">
         <div className="flex items-center space-x-2">
-          <Checkbox id="remember-me" {...register("rememberMe")} />
+          <Checkbox id="remember-me" {...register("rememberMe", { setValueAs: (value) => value === "on" })} />
           <label
             htmlFor="remember-me"
             className="text-sm font-medium leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70"

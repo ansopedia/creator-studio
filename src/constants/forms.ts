@@ -7,6 +7,7 @@ export type AuthFormProps = {
   placeholder: string;
   name: string;
 };
+
 export const SIGN_UP_FORM: AuthFormProps[] = [
   {
     id: "1",
@@ -47,7 +48,7 @@ export const LOGIN_FORM: AuthFormProps[] = [
     type: "email",
   },
   {
-    id: "4",
+    id: "2",
     inputType: "input",
     placeholder: "Password",
     name: "password",
