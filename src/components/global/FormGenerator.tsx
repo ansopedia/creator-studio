@@ -1,5 +1,5 @@
 import { ErrorMessage } from "@hookform/error-message";
-import { FieldErrors, FieldValues, UseFormRegister } from "react-hook-form";
+import { FieldErrors, FieldValues, Path, UseFormRegister } from "react-hook-form";
 
 import { Input, Label, Textarea } from "@/components/ui";
 
@@ -10,13 +10,13 @@ type InputTypeProps = {
   textarea: { lines: number };
 };
 
-type FormGeneratorProps<T extends InputType> = {
+type FormGeneratorProps<T extends InputType, F extends FieldValues> = {
   inputType: T;
   label?: string;
   placeholder: string;
-  register: UseFormRegister<FieldValues>;
-  name: string;
-  errors: FieldErrors<FieldValues>;
+  register: UseFormRegister<F>;
+  name: Path<F>;
+  errors: FieldErrors<F>;
 } & InputTypeProps[T];
 
 const ErrorMessageComponent = ({ errors, name }: { errors: FieldErrors<FieldValues>; name: string }) => (
@@ -27,13 +27,13 @@ const ErrorMessageComponent = ({ errors, name }: { errors: FieldErrors<FieldValu
   />
 );
 
-export const FormGenerator = <T extends InputType>(props: FormGeneratorProps<T>) => {
+export const FormGenerator = <T extends InputType, F extends FieldValues>(props: FormGeneratorProps<T, F>) => {
   const { inputType, label, placeholder, register, name, errors } = props;
 
   const commonProps = {
     id: `${inputType}-${label}`,
     placeholder,
-    ...register(name),
+    ...register(name), // Cast name to keyof F
   };
 
   const renderInput = () => (
