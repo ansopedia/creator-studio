@@ -3,6 +3,7 @@ import localFont from "next/font/local";
 
 import { ThemeProvider } from "@/components/theme";
 
+import { Toaster } from "../components/ui/toaster";
 import { ReactQueryProvider } from "../react-query/provider";
 import { ReduxProvider } from "../redux/provider";
 import "./globals.css";
@@ -35,6 +36,7 @@ export default function RootLayout({
           <ReduxProvider>
             <ReactQueryProvider>{children}</ReactQueryProvider>
           </ReduxProvider>
+          <Toaster />
         </ThemeProvider>
       </body>
     </html>
