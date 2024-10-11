@@ -20,6 +20,7 @@ const LoginForm = () => {
           register={register}
           errors={errors}
           name={field.name as Path<LoginSchema>}
+          value={field.value}
         />
       ))}
       <div className="flex items-center justify-between">

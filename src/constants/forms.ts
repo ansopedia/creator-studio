@@ -6,6 +6,7 @@ export type AuthFormProps = {
   label?: string;
   placeholder: string;
   name: string;
+  value?: string;
 };
 
 export const SIGN_UP_FORM: AuthFormProps[] = [
