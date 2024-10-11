@@ -21,8 +21,20 @@ export const useLogin = () => {
 
   const { isPending, mutate } = useMutation({
     mutationFn: authenticateUser,
-    onSuccess: () => {
-      router.push("/dashboard");
+    onSuccess: (data) => {
+      if (data?.status === "success") {
+        toast({
+          title: "Success",
+          description: data.message,
+        });
+        router.push("/dashboard");
+      } else {
+        toast({
+          title: "Error",
+          description: data?.message,
+          variant: "destructive",
+        });
+      }
     },
     onError: (error) => {
       toast({

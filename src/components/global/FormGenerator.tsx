@@ -17,6 +17,7 @@ type FormGeneratorProps<T extends InputType, F extends FieldValues> = {
   register: UseFormRegister<F>;
   name: Path<F>;
   errors: FieldErrors<F>;
+  value?: string;
 } & InputTypeProps[T];
 
 const ErrorMessageComponent = ({ errors, name }: { errors: FieldErrors<FieldValues>; name: string }) => (
@@ -28,11 +29,12 @@ const ErrorMessageComponent = ({ errors, name }: { errors: FieldErrors<FieldValu
 );
 
 export const FormGenerator = <T extends InputType, F extends FieldValues>(props: FormGeneratorProps<T, F>) => {
-  const { inputType, label, placeholder, register, name, errors } = props;
+  const { inputType, label, placeholder, register, name, errors, value } = props;
 
   const commonProps = {
     id: `${inputType}-${label}`,
     placeholder,
+    value,
     ...register(name), // Cast name to keyof F
   };
 
