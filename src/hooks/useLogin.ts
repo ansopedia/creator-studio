@@ -1,4 +1,4 @@
-import { useRouter } from "next/navigation";
+import { useRouter, useSearchParams } from "next/navigation";
 
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useMutation } from "@tanstack/react-query";
@@ -11,6 +11,7 @@ import { useToast } from "./use-toast";
 export const useLogin = () => {
   const { toast } = useToast();
   const router = useRouter();
+  const searchParams = useSearchParams();
   const {
     register,
     handleSubmit,
@@ -19,10 +20,18 @@ export const useLogin = () => {
     resolver: zodResolver(LoginSchema),
   });
 
+  if (searchParams.get("error")) {
+    toast({
+      title: "Error",
+      description: "Failed to login",
+      variant: "destructive",
+    });
+  }
+
   const { isPending, mutate } = useMutation({
     mutationFn: authenticateUser,
     onSuccess: (data) => {
-      if (data?.status === "success") {
+      if (data.status === "success") {
         toast({
           title: "Success",
           description: data.message,
@@ -31,7 +40,7 @@ export const useLogin = () => {
       } else {
         toast({
           title: "Error",
-          description: data?.message,
+          description: data.message,
           variant: "destructive",
         });
       }
