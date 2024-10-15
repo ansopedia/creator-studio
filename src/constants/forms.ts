@@ -1,7 +1,7 @@
 export type AuthFormProps = {
   id: string;
   type: "email" | "text" | "password";
-  inputType: "select" | "input";
+  inputType: "select" | "input" | "password";
   options?: { value: string; label: string; id: string }[];
   label?: string;
   placeholder: string;
@@ -50,7 +50,7 @@ export const LOGIN_FORM: AuthFormProps[] = [
   },
   {
     id: "2",
-    inputType: "input",
+    inputType: "password",
     placeholder: "Password",
     name: "password",
     type: "password",

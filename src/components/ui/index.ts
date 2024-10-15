@@ -8,3 +8,4 @@ export { Separator } from "./separator";
 export { SignInWithGoogle } from "./signin-with-google";
 export { Textarea } from "./textarea";
 export { Typography } from "./typography";
+export { Password } from "./password";

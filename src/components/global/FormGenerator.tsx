@@ -1,7 +1,7 @@
 import { ErrorMessage } from "@hookform/error-message";
 import { FieldErrors, FieldValues, Path, UseFormRegister } from "react-hook-form";
 
-import { Input, Label, Textarea } from "@/components/ui";
+import { Input, Label, Password, Textarea } from "@/components/ui";
 
 type InputType = "select" | "input" | "textarea";
 type InputTypeProps = {
@@ -64,10 +64,19 @@ export const FormGenerator = <T extends InputType, F extends FieldValues>(props:
     />
   );
 
+  const renderPassword = () => (
+    <Password
+      type={(props as InputTypeProps["input"]).type}
+      className="bg-themeBlack border-themeGray text-themeTextGray"
+      {...commonProps}
+    />
+  );
+
   const inputComponents = {
     input: renderInput(),
     select: renderSelect(),
     textarea: renderTextarea(),
+    password: renderPassword(),
   };
 
   const InputComponent = inputComponents[inputType];
