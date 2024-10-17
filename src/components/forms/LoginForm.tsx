@@ -8,7 +8,7 @@ import { Ansopedia_CONSTANTS } from "@/constants";
 import { useLogin } from "@/hooks";
 import { LoginSchema } from "@/types/auth";
 
-const LoginForm = () => {
+export const LoginForm = () => {
   const { isPending, handleSubmit, register, errors, onSubmit } = useLogin();
 
   return (
@@ -17,6 +17,7 @@ const LoginForm = () => {
         <FormGenerator
           {...field}
           key={field.id}
+          inputType={field.inputType}
           register={register}
           errors={errors}
           name={field.name as Path<LoginSchema>}
@@ -43,5 +44,3 @@ const LoginForm = () => {
     </form>
   );
 };
-
-export default LoginForm;

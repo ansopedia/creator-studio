@@ -3,7 +3,7 @@
 import axios from "axios";
 
 import { IApiResponse, saveAccessToken, saveRefreshToken } from "../lib/server";
-import { LoginSchema } from "../types/auth";
+import { LoginSchema, SignUpSchema } from "../types/auth";
 
 // Set default headers and validation
 axios.defaults.headers.common["Origin"] = "http://localhost:3000";
@@ -47,5 +47,15 @@ export const authenticateUser = async (credentials: LoginSchema) => {
     return data;
   } catch (error) {
     throw axios.isAxiosError(error) ? new Error("Internal server error") : new Error("Failed to authenticate user");
+  }
+};
+
+export const signUpUser = async (user: SignUpSchema) => {
+  try {
+    const { data } = await axios.post<IApiResponse>(`${process.env.NEXT_PUBLIC_BACKEND_URL}/api/v1/auth/sign-up`, user);
+
+    return data;
+  } catch (error) {
+    throw axios.isAxiosError(error) ? new Error("Internal server error") : new Error("Failed to sign up user");
   }
 };
